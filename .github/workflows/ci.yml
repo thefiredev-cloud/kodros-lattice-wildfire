@@ -1,0 +1,28 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Tests use captured fixtures and the local contract harness; network feeds are not needed.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --locked --extra talk --group dev
+      # Anduril's REST OpenAPI spec is fetched, not redistributed.
+      - run: mkdir -p vendor && curl -fsSL -o vendor/lattice-rest-openapi.json https://developer.anduril.com/openapi/rest.json
+      - run: uv run ruff check src tests evals
+      - run: uv run ruff format --check src tests evals
+      - run: uv run pytest -q -p no:cacheprovider
+        env:
+          LW_CACHE_DIR: ${{ runner.temp }}/lw-cache

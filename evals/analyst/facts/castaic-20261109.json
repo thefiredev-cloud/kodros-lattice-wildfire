@@ -1,0 +1,188 @@
+{
+ "exposures": {
+  "hospitals": [
+   {
+    "bearing_deg": 149,
+    "direction": "SSE",
+    "distance_km": 10.2,
+    "id": "3186500",
+    "kind": "hospital",
+    "name": "Henry Mayo Newhall Memorial Hospital"
+   },
+   {
+    "bearing_deg": 149,
+    "direction": "SSE",
+    "distance_km": 28.5,
+    "id": "3179400",
+    "kind": "hospital",
+    "name": "Providence Holy Cross Medical Center"
+   },
+   {
+    "bearing_deg": 147,
+    "direction": "SSE",
+    "distance_km": 29.6,
+    "id": "3179430",
+    "kind": "hospital",
+    "name": "Mission Community Hospital - San Fernando Campus For Health And Education"
+   }
+  ]
+ },
+ "fuel": {
+  "fhsz": "NonWildland",
+  "fhsz_status": "mapped, not a fire hazard class"
+ },
+ "generated_at": "2026-11-09T20:31:42+00:00",
+ "location": {
+  "county_zone": "CAC037",
+  "fire_weather_zone": "CAZ288",
+  "forecast_zone": "CAZ088",
+  "grid": "LOX/145,67",
+  "nearest_place": {
+   "bearing_deg_from_place": 0,
+   "city": "Castaic",
+   "distance_km": 0.0,
+   "state": "CA"
+  },
+  "nws_office": "LOX",
+  "time_zone": "America/Los_Angeles"
+ },
+ "nearby_fire_activity": {
+  "entities": null,
+  "radius_km": 10.0
+ },
+ "resources": {
+  "fire_stations": [
+   {
+    "bearing_deg": 137,
+    "direction": "SE",
+    "distance_km": 0.5,
+    "id": "149",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 149"
+   },
+   {
+    "bearing_deg": 194,
+    "direction": "SSW",
+    "distance_km": 5.2,
+    "id": "143",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 143"
+   },
+   {
+    "bearing_deg": 173,
+    "direction": "S",
+    "distance_km": 6.8,
+    "id": "76",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 76"
+   }
+  ]
+ },
+ "schema": "lattice-wildfire/analyst-facts/v1",
+ "sources": [
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:41+00:00",
+   "from_cache": false,
+   "name": "NWS points",
+   "stale": false,
+   "url": "https://api.weather.gov/points/34.5000,-118.6200"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:41+00:00",
+   "from_cache": false,
+   "name": "NWS forecast",
+   "stale": false,
+   "url": "https://api.weather.gov/gridpoints/LOX/145,67/forecast"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:42+00:00",
+   "from_cache": false,
+   "name": "NWS active alerts at point",
+   "stale": false,
+   "url": "https://api.weather.gov/alerts/active?point=34.5000%2C-118.6200"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:27+00:00",
+   "from_cache": true,
+   "name": "LA County FHSZ (LRA+SRA)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Hazards/MapServer/2/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:42+00:00",
+   "from_cache": false,
+   "name": "LACoFD fire stations (bbox -118.87,34.3,-118.37,34.7)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/137/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:42+00:00",
+   "from_cache": false,
+   "name": "LA County hospitals (bbox -119.22,34,-118.02,35)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/81/query"
+  }
+ ],
+ "target": {
+  "data_type": "operator-point",
+  "description": null,
+  "entity_id": null,
+  "lat": 34.5,
+  "lon": -118.62,
+  "name": "Castaic",
+  "platform_type": null,
+  "source_time": null
+ },
+ "task_id": null,
+ "unknowns": [
+  "Fire size, rate of spread, fuel moisture and cause are not in the gathered sources"
+ ],
+ "weather": {
+  "alerts": [],
+  "forecast": {
+   "generated": "2026-11-09T20:31:41+00:00",
+   "updated": "2026-11-09T18:26:41+00:00"
+  },
+  "periods": [
+   {
+    "end": "2026-11-09T18:00:00-08:00",
+    "name": "This Afternoon",
+    "precip_chance_pct": 0,
+    "short_forecast": "Mostly Sunny",
+    "start": "2026-11-09T12:00:00-08:00",
+    "temperature": 85,
+    "temperature_unit": "F",
+    "wind_direction": "NW",
+    "wind_speed": "5 to 10 mph"
+   },
+   {
+    "end": "2026-11-10T06:00:00-08:00",
+    "name": "Tonight",
+    "precip_chance_pct": 0,
+    "short_forecast": "Partly Cloudy",
+    "start": "2026-11-09T18:00:00-08:00",
+    "temperature": 54,
+    "temperature_unit": "F",
+    "wind_direction": "NNW",
+    "wind_speed": "5 to 10 mph"
+   },
+   {
+    "end": "2026-11-10T18:00:00-08:00",
+    "name": "Tuesday",
+    "precip_chance_pct": 0,
+    "short_forecast": "Sunny",
+    "start": "2026-11-10T06:00:00-08:00",
+    "temperature": 85,
+    "temperature_unit": "F",
+    "wind_direction": "NNE",
+    "wind_speed": "10 to 15 mph"
+   }
+  ]
+ }
+}

@@ -1,0 +1,188 @@
+{
+ "exposures": {
+  "hospitals": [
+   {
+    "bearing_deg": 61,
+    "direction": "ENE",
+    "distance_km": 13.9,
+    "id": "3179421",
+    "kind": "hospital",
+    "name": "West Hills Hospital and Medical Center"
+   },
+   {
+    "bearing_deg": 79,
+    "direction": "E",
+    "distance_km": 16.0,
+    "id": "3179375",
+    "kind": "hospital",
+    "name": "Kaiser Permanente - Woodland Hills Medical Center"
+   },
+   {
+    "bearing_deg": 82,
+    "direction": "E",
+    "distance_km": 21.3,
+    "id": "3179404",
+    "kind": "hospital",
+    "name": "Providence Tarzana Medical Center"
+   }
+  ]
+ },
+ "fuel": {
+  "fhsz": "Very High",
+  "fhsz_status": "fire hazard severity zone"
+ },
+ "generated_at": "2026-11-09T20:31:40+00:00",
+ "location": {
+  "county_zone": "CAC037",
+  "fire_weather_zone": "CAZ371",
+  "forecast_zone": "CAZ371",
+  "grid": "LOX/137,52",
+  "nearest_place": {
+   "bearing_deg_from_place": 0,
+   "city": "Agoura Hills",
+   "distance_km": 0.0,
+   "state": "CA"
+  },
+  "nws_office": "LOX",
+  "time_zone": "America/Los_Angeles"
+ },
+ "nearby_fire_activity": {
+  "entities": null,
+  "radius_km": 10.0
+ },
+ "resources": {
+  "fire_stations": [
+   {
+    "bearing_deg": 305,
+    "direction": "NW",
+    "distance_km": 0.9,
+    "id": "89",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 89 (Battalion 5 Headquarters)"
+   },
+   {
+    "bearing_deg": 144,
+    "direction": "SE",
+    "distance_km": 1.2,
+    "id": "65",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 65"
+   },
+   {
+    "bearing_deg": 265,
+    "direction": "W",
+    "distance_km": 5.4,
+    "id": "144",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 144"
+   }
+  ]
+ },
+ "schema": "lattice-wildfire/analyst-facts/v1",
+ "sources": [
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:55+00:00",
+   "from_cache": true,
+   "name": "NWS points",
+   "stale": false,
+   "url": "https://api.weather.gov/points/34.1430,-118.7610"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:55+00:00",
+   "from_cache": true,
+   "name": "NWS forecast",
+   "stale": false,
+   "url": "https://api.weather.gov/gridpoints/LOX/137,52/forecast"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:55+00:00",
+   "from_cache": true,
+   "name": "NWS active alerts at point",
+   "stale": false,
+   "url": "https://api.weather.gov/alerts/active?point=34.1430%2C-118.7610"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:56+00:00",
+   "from_cache": true,
+   "name": "LA County FHSZ (LRA+SRA)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Hazards/MapServer/2/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:56+00:00",
+   "from_cache": true,
+   "name": "LACoFD fire stations (bbox -119.011,33.943,-118.511,34.343)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/137/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:56+00:00",
+   "from_cache": true,
+   "name": "LA County hospitals (bbox -119.011,33.943,-118.511,34.343)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/81/query"
+  }
+ ],
+ "target": {
+  "data_type": "operator-point",
+  "description": null,
+  "entity_id": null,
+  "lat": 34.143,
+  "lon": -118.761,
+  "name": "Agoura Hills",
+  "platform_type": null,
+  "source_time": null
+ },
+ "task_id": null,
+ "unknowns": [
+  "Fire size, rate of spread, fuel moisture and cause are not in the gathered sources"
+ ],
+ "weather": {
+  "alerts": [],
+  "forecast": {
+   "generated": "2026-11-09T20:30:55+00:00",
+   "updated": "2026-11-09T18:26:41+00:00"
+  },
+  "periods": [
+   {
+    "end": "2026-11-09T18:00:00-08:00",
+    "name": "This Afternoon",
+    "precip_chance_pct": 0,
+    "short_forecast": "Mostly Sunny",
+    "start": "2026-11-09T12:00:00-08:00",
+    "temperature": 83,
+    "temperature_unit": "F",
+    "wind_direction": "NW",
+    "wind_speed": "5 to 10 mph"
+   },
+   {
+    "end": "2026-11-10T06:00:00-08:00",
+    "name": "Tonight",
+    "precip_chance_pct": 0,
+    "short_forecast": "Partly Cloudy",
+    "start": "2026-11-09T18:00:00-08:00",
+    "temperature": 48,
+    "temperature_unit": "F",
+    "wind_direction": "N",
+    "wind_speed": "5 to 10 mph"
+   },
+   {
+    "end": "2026-11-10T18:00:00-08:00",
+    "name": "Tuesday",
+    "precip_chance_pct": 0,
+    "short_forecast": "Sunny",
+    "start": "2026-11-10T06:00:00-08:00",
+    "temperature": 85,
+    "temperature_unit": "F",
+    "wind_direction": "NE",
+    "wind_speed": "5 to 10 mph"
+   }
+  ]
+ }
+}

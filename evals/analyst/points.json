@@ -1,0 +1,126 @@
+{
+ "schema": "lattice-wildfire/analyst-eval-points/v1",
+ "captured": "20261109",
+ "points": [
+  {
+   "slug": "altadena",
+   "name": "Altadena (Eaton Canyon)",
+   "lat": 34.2085,
+   "lon": -118.1325,
+   "expect_fhsz": "Very High",
+   "fhsz": "Very High",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/altadena-20261109.json",
+   "captured_at": "2026-11-09T20:31:38+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "malibu",
+   "name": "Malibu",
+   "lat": 34.0259,
+   "lon": -118.7798,
+   "expect_fhsz": "Very High",
+   "fhsz": "Very High",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/malibu-20261109.json",
+   "captured_at": "2026-11-09T20:31:38+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "santa-clarita",
+   "name": "Santa Clarita - Canyon Country",
+   "lat": 34.44,
+   "lon": -118.52,
+   "expect_fhsz": "High",
+   "fhsz": "High",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/santa-clarita-20261109.json",
+   "captured_at": "2026-11-09T20:31:39+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "palmdale",
+   "name": "Palmdale",
+   "lat": 34.63,
+   "lon": -118.13,
+   "expect_fhsz": "Moderate",
+   "fhsz": "Moderate",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/palmdale-20261109.json",
+   "captured_at": "2026-11-09T20:31:40+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "avalon-catalina",
+   "name": "Avalon, Santa Catalina Island",
+   "lat": 33.3428,
+   "lon": -118.3273,
+   "expect_fhsz": "Very High",
+   "fhsz": "Very High",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/avalon-catalina-20261109.json",
+   "captured_at": "2026-11-09T20:31:40+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "pasadena",
+   "name": "Pasadena",
+   "lat": 34.1478,
+   "lon": -118.1445,
+   "expect_fhsz": "NonWildland",
+   "fhsz": "NonWildland",
+   "fhsz_status": "mapped, not a fire hazard class",
+   "facts": "facts/pasadena-20261109.json",
+   "captured_at": "2026-11-09T20:31:40+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "agoura-hills",
+   "name": "Agoura Hills",
+   "lat": 34.143,
+   "lon": -118.761,
+   "expect_fhsz": "Very High",
+   "fhsz": "Very High",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/agoura-hills-20261109.json",
+   "captured_at": "2026-11-09T20:31:40+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "sylmar",
+   "name": "Sylmar",
+   "lat": 34.308,
+   "lon": -118.45,
+   "expect_fhsz": "NonWildland",
+   "fhsz": "NonWildland",
+   "fhsz_status": "mapped, not a fire hazard class",
+   "facts": "facts/sylmar-20261109.json",
+   "captured_at": "2026-11-09T20:31:40+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "quartz-hill",
+   "name": "Quartz Hill (west Lancaster)",
+   "lat": 34.68,
+   "lon": -118.22,
+   "expect_fhsz": "Moderate",
+   "fhsz": "Moderate",
+   "fhsz_status": "fire hazard severity zone",
+   "facts": "facts/quartz-hill-20261109.json",
+   "captured_at": "2026-11-09T20:31:41+00:00",
+   "source_errors": []
+  },
+  {
+   "slug": "castaic",
+   "name": "Castaic",
+   "lat": 34.5,
+   "lon": -118.62,
+   "expect_fhsz": "NonWildland",
+   "fhsz": "NonWildland",
+   "fhsz_status": "mapped, not a fire hazard class",
+   "facts": "facts/castaic-20261109.json",
+   "captured_at": "2026-11-09T20:31:42+00:00",
+   "source_errors": []
+  }
+ ]
+}

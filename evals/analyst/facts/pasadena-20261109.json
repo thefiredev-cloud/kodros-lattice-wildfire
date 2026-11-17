@@ -1,0 +1,188 @@
+{
+ "exposures": {
+  "hospitals": [
+   {
+    "bearing_deg": 206,
+    "direction": "SSW",
+    "distance_km": 1.7,
+    "id": "3179370",
+    "kind": "hospital",
+    "name": "Huntington Memorial Hospital"
+   },
+   {
+    "bearing_deg": 24,
+    "direction": "NNE",
+    "distance_km": 2.9,
+    "id": "3178056",
+    "kind": "hospital",
+    "name": "Urdc Human Services Corporation - Bill Moore Community Health Clinic"
+   },
+   {
+    "bearing_deg": 97,
+    "direction": "E",
+    "distance_km": 5.5,
+    "id": "3179458",
+    "kind": "hospital",
+    "name": "Pasadena Community Urgent Care"
+   }
+  ]
+ },
+ "fuel": {
+  "fhsz": "NonWildland",
+  "fhsz_status": "mapped, not a fire hazard class"
+ },
+ "generated_at": "2026-11-09T20:31:40+00:00",
+ "location": {
+  "county_zone": "CAC037",
+  "fire_weather_zone": "CAZ548",
+  "forecast_zone": "CAZ548",
+  "grid": "LOX/159,48",
+  "nearest_place": {
+   "bearing_deg_from_place": 0,
+   "city": "Pasadena",
+   "distance_km": 0.0,
+   "state": "CA"
+  },
+  "nws_office": "LOX",
+  "time_zone": "America/Los_Angeles"
+ },
+ "nearby_fire_activity": {
+  "entities": null,
+  "radius_km": 10.0
+ },
+ "resources": {
+  "fire_stations": [
+   {
+    "bearing_deg": 13,
+    "direction": "NNE",
+    "distance_km": 4.7,
+    "id": "11",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 11"
+   },
+   {
+    "bearing_deg": 346,
+    "direction": "NNW",
+    "distance_km": 5.2,
+    "id": "12",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 12"
+   },
+   {
+    "bearing_deg": 58,
+    "direction": "ENE",
+    "distance_km": 5.5,
+    "id": "66",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 66"
+   }
+  ]
+ },
+ "schema": "lattice-wildfire/analyst-facts/v1",
+ "sources": [
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T19:38:43+00:00",
+   "from_cache": true,
+   "name": "NWS points",
+   "stale": false,
+   "url": "https://api.weather.gov/points/34.1478,-118.1445"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:57+00:00",
+   "from_cache": true,
+   "name": "NWS forecast",
+   "stale": false,
+   "url": "https://api.weather.gov/gridpoints/LOX/159,48/forecast"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:57+00:00",
+   "from_cache": true,
+   "name": "NWS active alerts at point",
+   "stale": false,
+   "url": "https://api.weather.gov/alerts/active?point=34.1478%2C-118.1445"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T19:38:44+00:00",
+   "from_cache": true,
+   "name": "LA County FHSZ (LRA+SRA)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Hazards/MapServer/2/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T19:38:44+00:00",
+   "from_cache": true,
+   "name": "LACoFD fire stations (bbox -118.394,33.9478,-117.894,34.3478)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/137/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T19:38:44+00:00",
+   "from_cache": true,
+   "name": "LA County hospitals (bbox -118.394,33.9478,-117.894,34.3478)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/81/query"
+  }
+ ],
+ "target": {
+  "data_type": "operator-point",
+  "description": null,
+  "entity_id": null,
+  "lat": 34.1478,
+  "lon": -118.1445,
+  "name": "Pasadena",
+  "platform_type": null,
+  "source_time": null
+ },
+ "task_id": null,
+ "unknowns": [
+  "Fire size, rate of spread, fuel moisture and cause are not in the gathered sources"
+ ],
+ "weather": {
+  "alerts": [],
+  "forecast": {
+   "generated": "2026-11-09T19:18:24+00:00",
+   "updated": "2026-11-09T18:26:41+00:00"
+  },
+  "periods": [
+   {
+    "end": "2026-11-09T18:00:00-08:00",
+    "name": "Today",
+    "precip_chance_pct": 0,
+    "short_forecast": "Mostly Sunny",
+    "start": "2026-11-09T11:00:00-08:00",
+    "temperature": 82,
+    "temperature_unit": "F",
+    "wind_direction": "WSW",
+    "wind_speed": "5 mph"
+   },
+   {
+    "end": "2026-11-10T06:00:00-08:00",
+    "name": "Tonight",
+    "precip_chance_pct": 0,
+    "short_forecast": "Partly Cloudy",
+    "start": "2026-11-09T18:00:00-08:00",
+    "temperature": 55,
+    "temperature_unit": "F",
+    "wind_direction": "N",
+    "wind_speed": "5 mph"
+   },
+   {
+    "end": "2026-11-10T18:00:00-08:00",
+    "name": "Tuesday",
+    "precip_chance_pct": 0,
+    "short_forecast": "Sunny",
+    "start": "2026-11-10T06:00:00-08:00",
+    "temperature": 84,
+    "temperature_unit": "F",
+    "wind_direction": "NNW",
+    "wind_speed": "5 mph"
+   }
+  ]
+ }
+}

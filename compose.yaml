@@ -1,0 +1,38 @@
+# Full pipeline against the local contract harness.
+# For a Lattice Sandbox: drop `harness`, unset LATTICE_BASE_URL, and set LATTICE_ENDPOINT,
+# ENVIRONMENT_TOKEN and SANDBOXES_TOKEN in .env.
+x-app: &app
+  build: .
+  image: lattice-wildfire:dev
+  network_mode: host
+  env_file: [.env]
+  environment:
+    LATTICE_BASE_URL: ${LATTICE_BASE_URL:-http://127.0.0.1:8765}
+    ENVIRONMENT_TOKEN: ${ENVIRONMENT_TOKEN:-harness-token}
+  restart: unless-stopped
+
+services:
+  harness:
+    <<: *app
+    command: ["lw-harness", "--port", "8765"]
+  feeds:
+    <<: *app
+    command: ["lw-feeds", "--interval", "300"]
+    depends_on: [harness]
+  fusion:
+    <<: *app
+    command: ["lw-fusion"]
+    depends_on: [feeds]
+  analyst:
+    <<: *app
+    command: ["lw-analyst"]
+    depends_on: [harness]
+  planner:
+    <<: *app
+    command: ["lw-planner"]
+    depends_on: [fusion, analyst]
+  test:
+    <<: *app
+    restart: "no"
+    profiles: [test]
+    command: ["pytest", "-q"]

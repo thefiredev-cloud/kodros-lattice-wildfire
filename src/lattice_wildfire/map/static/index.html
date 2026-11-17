@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Lattice wildfire picture</title>
+    <!-- Leaflet 1.9.4 is vendored; the SRI hashes are the published ones (leafletjs.com):
+         leaflet.js  sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=
+         leaflet.css sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY= -->
+    <link
+      rel="stylesheet"
+      href="/vendor/leaflet/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <a class="skip" href="#panel">Skip to picture details</a>
+
+    <header class="bar">
+      <div class="bar-title">
+        <h1>Lattice wildfire picture</h1>
+        <p class="kicker">Local read-only view · points and areas by <code>provenance.data_type</code></p>
+      </div>
+      <div class="bar-status">
+        <span id="status" class="status" role="status" aria-live="polite">loading picture…</span>
+        <button id="refresh" class="refresh" type="button">Refresh now</button>
+      </div>
+    </header>
+
+    <p id="banner" class="banner" role="alert" hidden></p>
+
+    <main class="layout">
+      <div id="map" class="map" role="application" aria-label="Wildfire picture map"></div>
+
+      <aside id="panel" class="panel" tabindex="-1" aria-label="Picture details">
+        <section class="card card-list">
+          <h2>New start candidates</h2>
+          <p class="hint" id="candidates-hint">Candidates appear after Ember Fusion publishes them.</p>
+          <ul id="candidates" class="list"></ul>
+        </section>
+
+        <section class="card card-list">
+          <h2>Tasks</h2>
+          <p class="hint" id="tasks-hint">No tasks yet.</p>
+          <ul id="tasks" class="list"></ul>
+        </section>
+
+        <section class="card card-brief">
+          <h2 id="brief-title">Brief</h2>
+          <p class="hint" id="brief-meta">Select a candidate or a task.</p>
+          <div id="brief" class="brief" aria-live="polite"></div>
+        </section>
+      </aside>
+    </main>
+
+    <script
+      src="/vendor/leaflet/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    ></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

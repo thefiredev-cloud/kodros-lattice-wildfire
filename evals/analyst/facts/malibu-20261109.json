@@ -1,0 +1,199 @@
+{
+ "exposures": {
+  "hospitals": [
+   {
+    "bearing_deg": 47,
+    "direction": "NE",
+    "distance_km": 23.7,
+    "id": "3179375",
+    "kind": "hospital",
+    "name": "Kaiser Permanente - Woodland Hills Medical Center"
+   },
+   {
+    "bearing_deg": 35,
+    "direction": "NE",
+    "distance_km": 24.1,
+    "id": "3179421",
+    "kind": "hospital",
+    "name": "West Hills Hospital and Medical Center"
+   },
+   {
+    "bearing_deg": 55,
+    "direction": "NE",
+    "distance_km": 27.9,
+    "id": "3179404",
+    "kind": "hospital",
+    "name": "Providence Tarzana Medical Center"
+   }
+  ]
+ },
+ "fuel": {
+  "fhsz": "Very High",
+  "fhsz_status": "fire hazard severity zone"
+ },
+ "generated_at": "2026-11-09T20:31:38+00:00",
+ "location": {
+  "county_zone": "CAC037",
+  "fire_weather_zone": "CAZ362",
+  "forecast_zone": "CAZ362",
+  "grid": "LOX/135,47",
+  "nearest_place": {
+   "bearing_deg_from_place": 0,
+   "city": "Malibu",
+   "distance_km": 0.0,
+   "state": "CA"
+  },
+  "nws_office": "LOX",
+  "time_zone": "America/Los_Angeles"
+ },
+ "nearby_fire_activity": {
+  "entities": null,
+  "radius_km": 10.0
+ },
+ "resources": {
+  "fire_stations": [
+   {
+    "bearing_deg": 249,
+    "direction": "WSW",
+    "distance_km": 1.7,
+    "id": "71",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 71"
+   },
+   {
+    "bearing_deg": 84,
+    "direction": "E",
+    "distance_km": 8.2,
+    "id": "88",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 88"
+   },
+   {
+    "bearing_deg": 279,
+    "direction": "W",
+    "distance_km": 9.7,
+    "id": "99",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 99"
+   }
+  ]
+ },
+ "schema": "lattice-wildfire/analyst-facts/v1",
+ "sources": [
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:47+00:00",
+   "from_cache": true,
+   "name": "NWS points",
+   "stale": false,
+   "url": "https://api.weather.gov/points/34.0259,-118.7798"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:48+00:00",
+   "from_cache": true,
+   "name": "NWS forecast",
+   "stale": false,
+   "url": "https://api.weather.gov/gridpoints/LOX/135,47/forecast"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:48+00:00",
+   "from_cache": true,
+   "name": "NWS active alerts at point",
+   "stale": false,
+   "url": "https://api.weather.gov/alerts/active?point=34.0259%2C-118.7798"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:17:58+00:00",
+   "from_cache": true,
+   "name": "LA County FHSZ (LRA+SRA)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Hazards/MapServer/2/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:48+00:00",
+   "from_cache": true,
+   "name": "LACoFD fire stations (bbox -119.03,33.8259,-118.53,34.2259)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/137/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:30:48+00:00",
+   "from_cache": true,
+   "name": "LA County hospitals (bbox -119.03,33.8259,-118.53,34.2259)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/81/query"
+  }
+ ],
+ "target": {
+  "data_type": "operator-point",
+  "description": null,
+  "entity_id": null,
+  "lat": 34.0259,
+  "lon": -118.7798,
+  "name": "Malibu",
+  "platform_type": null,
+  "source_time": null
+ },
+ "task_id": null,
+ "unknowns": [
+  "Fire size, rate of spread, fuel moisture and cause are not in the gathered sources"
+ ],
+ "weather": {
+  "alerts": [
+   {
+    "ends": "2026-11-10T12:00:00-08:00",
+    "event": "Coastal Flood Advisory",
+    "headline": "Coastal Flood Advisory issued November 9 at 7:41AM PST until November 10 at 12:00PM PST by NWS Los Angeles/Oxnard CA",
+    "id": "urn:oid:2.49.0.1.840.0.2a0b61ed256f5bdde26def779319a60087c030ad.003.1",
+    "onset": "2026-11-09T07:41:00-08:00",
+    "sender": "NWS Los Angeles/Oxnard CA",
+    "severity": "Minor",
+    "urgency": "Expected"
+   }
+  ],
+  "forecast": {
+   "generated": "2026-11-09T20:30:47+00:00",
+   "updated": "2026-11-09T18:26:41+00:00"
+  },
+  "periods": [
+   {
+    "end": "2026-11-09T18:00:00-08:00",
+    "name": "This Afternoon",
+    "precip_chance_pct": 0,
+    "short_forecast": "Mostly Sunny",
+    "start": "2026-11-09T12:00:00-08:00",
+    "temperature": 82,
+    "temperature_unit": "F",
+    "wind_direction": "NW",
+    "wind_speed": "10 mph"
+   },
+   {
+    "end": "2026-11-10T06:00:00-08:00",
+    "name": "Tonight",
+    "precip_chance_pct": 0,
+    "short_forecast": "Partly Cloudy",
+    "start": "2026-11-09T18:00:00-08:00",
+    "temperature": 64,
+    "temperature_unit": "F",
+    "wind_direction": "N",
+    "wind_speed": "5 to 10 mph"
+   },
+   {
+    "end": "2026-11-10T18:00:00-08:00",
+    "name": "Tuesday",
+    "precip_chance_pct": 0,
+    "short_forecast": "Sunny",
+    "start": "2026-11-10T06:00:00-08:00",
+    "temperature": 83,
+    "temperature_unit": "F",
+    "wind_direction": "NNE",
+    "wind_speed": "5 to 10 mph"
+   }
+  ]
+ }
+}

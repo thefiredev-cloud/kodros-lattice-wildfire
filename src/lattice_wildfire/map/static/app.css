@@ -1,0 +1,692 @@
+/* lw-map: dark, plain-background shell around a vendored Leaflet map.
+ * Layers keep their colors and their shapes when tiles cannot load (offline box). */
+
+:root {
+  --bg: #0b1220;
+  --bg-panel: #111a2b;
+  --bg-card: #162135;
+  --ink: #e7edf7;
+  --ink-dim: #a3b1c6;
+  --line: #26344c;
+  --accent: #7dd3fc;
+  --ok: #4ade80;
+  --bad: #f87171;
+  --active: #fbbf24;
+  --focus: #a5b4fc;
+  --hotspot: #f59e0b;
+  --incident: #dc2626;
+  --perimeter: #f97316;
+  --red-flag: #dc2626;
+  --station: #2563eb;
+  --candidate: #c026d3;
+  --analyst: #059669;
+  --other: #64748b;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  /* Flex column, not fixed grid rows: the banner is display:none most of the time, and a hidden
+     grid item must not push the map into an auto-sized row. */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--accent);
+  color: #06121f;
+  z-index: 1000;
+}
+
+.skip:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+}
+
+/* ---- header ------------------------------------------------------------ */
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #101a2c, #0d1524);
+}
+
+.bar h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.kicker {
+  margin: 0.15rem 0 0;
+  color: var(--ink-dim);
+  font-size: 0.8rem;
+}
+
+.kicker code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.bar-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status {
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+}
+
+.refresh {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  background: var(--bg-card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.refresh:hover {
+  border-color: var(--accent);
+}
+
+.refresh:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.banner {
+  margin: 0;
+  padding: 0.55rem 1rem;
+  background: #3b1219;
+  border-bottom: 1px solid #7f1d1d;
+  color: #fecaca;
+  font-size: 0.85rem;
+}
+
+/* ---- layout ------------------------------------------------------------ */
+
+.layout {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 28rem);
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.map {
+  min-height: 0;
+  height: 100%;
+  background: var(--bg);
+}
+
+#map {
+  /* Leaflet needs a height on the container; the grid row above supplies it. */
+  height: 100%;
+  width: 100%;
+}
+
+/* Plain background under everything: the picture stays readable with no tiles. */
+.leaflet-container {
+  background:
+    radial-gradient(circle at 30% 20%, #16233a 0%, #0b1220 55%, #070c15 100%);
+  font: inherit;
+  color-scheme: dark;
+}
+
+.leaflet-container .basemap-tiles {
+  mix-blend-mode: normal;
+  opacity: 0.92;
+}
+
+.leaflet-control-attribution {
+  background: rgba(7, 12, 21, 0.82);
+  color: var(--ink-dim);
+  font-size: 0.7rem;
+}
+
+.leaflet-control-attribution a {
+  color: var(--accent);
+}
+
+.leaflet-bar,
+.leaflet-control-scale-line {
+  background: rgba(17, 26, 43, 0.94);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.leaflet-bar a {
+  background: transparent;
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+
+.leaflet-bar a:hover {
+  background: var(--bg-card);
+}
+
+.leaflet-control-scale-line {
+  border-color: var(--line);
+  color: var(--ink);
+  text-shadow: none;
+}
+
+.leaflet-tooltip {
+  background: rgba(13, 21, 36, 0.97);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  padding: 0.35rem 0.5rem;
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: var(--line);
+}
+
+.tip-name,
+.popup-name {
+  margin: 0;
+  font-weight: 650;
+  font-size: 0.82rem;
+}
+
+.tip-facts,
+.popup-facts {
+  margin: 0.1rem 0 0;
+  color: var(--ink-dim);
+  font-size: 0.74rem;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: rgba(13, 21, 36, 0.98);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.leaflet-popup-content {
+  margin: 0.65rem 0.8rem;
+}
+
+.popup-description {
+  margin: 0.45rem 0 0;
+  max-height: 11rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+}
+
+.popup-id {
+  margin: 0.4rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  word-break: break-all;
+}
+
+/* ---- legend ------------------------------------------------------------ */
+
+.legend {
+  padding: 0.5rem 0.6rem;
+  background: rgba(13, 21, 36, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  font-size: 0.76rem;
+  min-width: 13rem;
+  max-height: 62vh;
+  overflow-y: auto;
+}
+
+.legend-title {
+  margin: 0 0 0.3rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  color: var(--ink-dim);
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.12rem 0;
+  cursor: pointer;
+}
+
+.legend-check {
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.legend-check:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.legend-label {
+  flex: 1 1 auto;
+}
+
+.legend-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-dim);
+}
+
+.swatch {
+  flex: 0 0 auto;
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  background: var(--other);
+  outline: 1px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 1px;
+}
+
+.swatch-dot {
+  border-radius: 50%;
+}
+
+.swatch-square {
+  border-radius: 1px;
+}
+
+.swatch-ring {
+  border-radius: 50%;
+  background: transparent !important;
+  border: 3px solid var(--analyst);
+}
+
+.swatch-diamond {
+  transform: rotate(45deg);
+}
+
+.swatch-triangle {
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  outline: none;
+}
+
+.swatch-dashed {
+  background: transparent !important;
+  border: 2px dashed var(--red-flag);
+}
+
+.swatch-polygon {
+  background: rgba(249, 115, 22, 0.2) !important;
+  border: 2px solid var(--perimeter);
+}
+
+.swatch-hotspot {
+  background: var(--hotspot);
+}
+
+.swatch-incident {
+  background: var(--incident);
+}
+
+.swatch-station {
+  background: var(--station);
+}
+
+.swatch-candidate {
+  background: var(--candidate);
+}
+
+.swatch-analyst {
+  background: var(--analyst);
+}
+
+.swatch-other {
+  background: var(--other);
+}
+
+.swatch-basemap {
+  background: linear-gradient(135deg, #1f2c44 0%, #334a6b 50%, #1f2c44 100%);
+}
+
+.swatch-county {
+  background: transparent !important;
+  outline: none;
+  border: 1px solid #7c8ba1;
+  height: 0.55rem;
+}
+
+/* Stations: small blue squares, drawn in a pane below hotspots. */
+.station-icon {
+  background: transparent;
+  border: none;
+}
+
+.station-square {
+  display: block;
+  width: 9px;
+  height: 9px;
+  background: var(--station);
+  border: 1.5px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px rgba(7, 12, 21, 0.55);
+}
+
+.station-icon:hover .station-square {
+  background: #3b82f6;
+}
+
+/* ---- side panel -------------------------------------------------------- */
+
+.panel {
+  min-height: 0;
+  /* Not hidden: if both lists sit at their cap the flex line can exceed the panel, and a scroll
+     is better than clipping the bottom of the brief. */
+  overflow-y: auto;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  border-left: 1px solid var(--line);
+  background: var(--bg-panel);
+}
+
+/* List cards size to their content and never shrink (flex-shrink 0), so a long brief cannot
+   squeeze them to a clipped row. They stop at 38% of the panel and their inner list scrolls. */
+.card-list {
+  flex: 0 0 auto;
+  min-height: 0;
+  max-height: 38%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-list .list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* The brief takes every pixel the lists leave, and can never be pushed below 30% of the panel. */
+.card-brief {
+  flex: 1 1 0;
+  min-height: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-brief .brief {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+}
+
+.panel:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  padding: 0.7rem 0.8rem;
+}
+
+.card h2 {
+  margin: 0 0 0.45rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.hint {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 0.82rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  background: #0f1829;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:hover {
+  border-color: var(--line);
+  background: #142137;
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.row.selected {
+  border-color: var(--accent);
+  background: #17263d;
+}
+
+.row-name {
+  font-size: 0.86rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.05rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.chip-ok {
+  color: var(--ok);
+  border-color: rgba(74, 222, 128, 0.55);
+}
+
+.chip-bad {
+  color: var(--bad);
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.chip-active {
+  color: var(--active);
+  border-color: rgba(251, 191, 36, 0.55);
+}
+
+.chip-idle {
+  color: var(--ink-dim);
+}
+
+.brief {
+  margin-top: 0.35rem;
+  max-height: 40vh;
+  overflow-y: auto;
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+}
+
+.brief h3,
+.brief h4,
+.brief h5,
+.brief h6 {
+  margin: 0.55rem 0 0.25rem;
+  font-size: 0.9rem;
+}
+
+.brief p {
+  margin: 0.25rem 0;
+}
+
+.brief ul,
+.brief ol {
+  margin: 0.25rem 0;
+  padding-left: 1.2rem;
+}
+
+.brief code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  background: #0c1526;
+  padding: 0.05rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.brief-note {
+  color: var(--ink-dim);
+  font-size: 0.82rem;
+}
+
+.brief-note.is-loading {
+  font-style: italic;
+}
+
+.brief-note.is-loading::after {
+  content: '';
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  margin-left: 0.4em;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: brief-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes brief-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---- small screens ----------------------------------------------------- */
+
+@media (max-width: 900px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .layout {
+    flex: 0 0 auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 60vh auto;
+    overflow: visible;
+  }
+
+  .map,
+  #map {
+    height: 60vh;
+  }
+
+  .panel {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    max-height: none;
+    overflow: visible;
+  }
+
+  .card-list {
+    max-height: none;
+  }
+
+  .card-list .list {
+    overflow: visible;
+  }
+
+  .card-brief {
+    flex: 0 0 auto;
+    min-height: 0;
+  }
+
+  .card-brief .brief {
+    overflow: visible;
+  }
+
+  .brief {
+    max-height: none;
+  }
+
+  .legend {
+    max-height: 40vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

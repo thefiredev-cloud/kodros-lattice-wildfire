@@ -1,0 +1,188 @@
+{
+ "exposures": {
+  "hospitals": [
+   {
+    "bearing_deg": 81,
+    "direction": "E",
+    "distance_km": 5.7,
+    "id": "3179340",
+    "kind": "hospital",
+    "name": "Antelope Valley Hospital - 5000"
+   },
+   {
+    "bearing_deg": 147,
+    "direction": "SSE",
+    "distance_km": 12.8,
+    "id": "3178081",
+    "kind": "hospital",
+    "name": "Palmdale Regional Medical Center"
+   },
+   {
+    "bearing_deg": 147,
+    "direction": "SSE",
+    "distance_km": 12.8,
+    "id": "3179457",
+    "kind": "hospital",
+    "name": "Palmdale Regional Medical Center"
+   }
+  ]
+ },
+ "fuel": {
+  "fhsz": "Moderate",
+  "fhsz_status": "fire hazard severity zone"
+ },
+ "generated_at": "2026-11-09T20:31:41+00:00",
+ "location": {
+  "county_zone": "CAC037",
+  "fire_weather_zone": "CAZ383",
+  "forecast_zone": "CAZ383",
+  "grid": "LOX/161,72",
+  "nearest_place": {
+   "bearing_deg_from_place": 0,
+   "city": "Lancaster",
+   "distance_km": 0.0,
+   "state": "CA"
+  },
+  "nws_office": "LOX",
+  "time_zone": "America/Los_Angeles"
+ },
+ "nearby_fire_activity": {
+  "entities": null,
+  "radius_km": 10.0
+ },
+ "resources": {
+  "fire_stations": [
+   {
+    "bearing_deg": 50,
+    "direction": "NE",
+    "distance_km": 2.2,
+    "id": "130",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 130"
+   },
+   {
+    "bearing_deg": 179,
+    "direction": "S",
+    "distance_km": 3.7,
+    "id": "84",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 84"
+   },
+   {
+    "bearing_deg": 108,
+    "direction": "ESE",
+    "distance_km": 4.3,
+    "id": "134",
+    "kind": "fire_station",
+    "name": "Los Angeles County Fire Department - Station 134"
+   }
+  ]
+ },
+ "schema": "lattice-wildfire/analyst-facts/v1",
+ "sources": [
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:40+00:00",
+   "from_cache": false,
+   "name": "NWS points",
+   "stale": false,
+   "url": "https://api.weather.gov/points/34.6800,-118.2200"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:41+00:00",
+   "from_cache": false,
+   "name": "NWS forecast",
+   "stale": false,
+   "url": "https://api.weather.gov/gridpoints/LOX/161,72/forecast"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:41+00:00",
+   "from_cache": false,
+   "name": "NWS active alerts at point",
+   "stale": false,
+   "url": "https://api.weather.gov/alerts/active?point=34.6800%2C-118.2200"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:12+00:00",
+   "from_cache": true,
+   "name": "LA County FHSZ (LRA+SRA)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Hazards/MapServer/2/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:41+00:00",
+   "from_cache": false,
+   "name": "LACoFD fire stations (bbox -118.47,34.48,-117.97,34.88)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/137/query"
+  },
+  {
+   "error": null,
+   "fetched_at": "2026-11-09T20:31:41+00:00",
+   "from_cache": false,
+   "name": "LA County hospitals (bbox -118.47,34.48,-117.97,34.88)",
+   "stale": false,
+   "url": "https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/LMS_Data_Public/MapServer/81/query"
+  }
+ ],
+ "target": {
+  "data_type": "operator-point",
+  "description": null,
+  "entity_id": null,
+  "lat": 34.68,
+  "lon": -118.22,
+  "name": "Quartz Hill (west Lancaster)",
+  "platform_type": null,
+  "source_time": null
+ },
+ "task_id": null,
+ "unknowns": [
+  "Fire size, rate of spread, fuel moisture and cause are not in the gathered sources"
+ ],
+ "weather": {
+  "alerts": [],
+  "forecast": {
+   "generated": "2026-11-09T20:31:41+00:00",
+   "updated": "2026-11-09T18:26:41+00:00"
+  },
+  "periods": [
+   {
+    "end": "2026-11-09T18:00:00-08:00",
+    "name": "This Afternoon",
+    "precip_chance_pct": 0,
+    "short_forecast": "Mostly Sunny",
+    "start": "2026-11-09T12:00:00-08:00",
+    "temperature": 77,
+    "temperature_unit": "F",
+    "wind_direction": "",
+    "wind_speed": "0 mph"
+   },
+   {
+    "end": "2026-11-10T06:00:00-08:00",
+    "name": "Tonight",
+    "precip_chance_pct": 0,
+    "short_forecast": "Partly Cloudy",
+    "start": "2026-11-09T18:00:00-08:00",
+    "temperature": 40,
+    "temperature_unit": "F",
+    "wind_direction": "NW",
+    "wind_speed": "0 to 5 mph"
+   },
+   {
+    "end": "2026-11-10T18:00:00-08:00",
+    "name": "Tuesday",
+    "precip_chance_pct": 0,
+    "short_forecast": "Sunny",
+    "start": "2026-11-10T06:00:00-08:00",
+    "temperature": 77,
+    "temperature_unit": "F",
+    "wind_direction": "NNE",
+    "wind_speed": "0 to 5 mph"
+   }
+  ]
+ }
+}

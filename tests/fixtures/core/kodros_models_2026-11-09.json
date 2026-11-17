@@ -1,0 +1,1 @@
+{"object": "list", "data": [{"id": "DeepSeek-V4.1-Flash-1017-EXL3", "object": "model", "created": 1794254916, "owned_by": "tensorfold"}, {"id": "cluster-current", "object": "model", "created": 1794254916, "owned_by": "tensorfold", "loaded_model": "DeepSeek-V4.1-Flash-1017-EXL3"}]}
