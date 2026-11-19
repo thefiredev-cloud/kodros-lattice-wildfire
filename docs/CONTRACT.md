@@ -1,7 +1,7 @@
 # lattice-wildfire build contract
 
 Five wildfire applications on Anduril's Lattice SDK (`anduril-lattice-sdk` 5.4.0, Python), one package.
-Default area of interest is Los Angeles County (Tanner is LACoFD). Local-first: the Kodros cluster LLM
+Default area of interest is Los Angeles County. Local-first: the Kodros cluster LLM
 (`http://127.0.0.1:8080/v1`, model `cluster-current`) is the only model used.
 
 ## Sources this combines
@@ -9,8 +9,8 @@ Default area of interest is Los Angeles County (Tanner is LACoFD). Local-first: 
 - Anduril GitHub: `lattice-sdk-python`, `lattice-sdk-ai` (official integration skills),
   `sample-app-ais-integration-rest` (entity publisher pattern), `sample-app-auto-reconnaissance`
   (arbiter/tasker/simulated asset pattern), `sample-app-entity-visualizer`, `sample-app-thumbnail` (Objects).
-- Our GitHub/local: free keyless fire feeds (vault skill `fire-gov-data-free-sources`), LACoFD/LA County
-  eGIS layers, the Kodros cluster, Hermes/OMP MCP tooling, `firestudy` and `Protocol-Guide` (LA County context).
+- Our GitHub/local: free keyless fire feeds, LA County eGIS layers, the Kodros cluster,
+  Hermes/OMP MCP tooling, and our own fire study and protocol reference apps (LA County context).
 - REST contract: `vendor/lattice-rest-openapi.json` fetched 2026-11-09 from
   `https://developer.anduril.com/openapi/rest.json`.
 
