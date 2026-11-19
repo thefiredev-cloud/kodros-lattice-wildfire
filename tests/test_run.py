@@ -242,12 +242,22 @@ def test_harness_stays_reachable_while_apps_stop(monkeypatch, tmp_path):
     sup._make_children()
     assert sup._start_harness()
     child = sup.children[0]
+    ready_marker = tmp_path / "app-handler-ready"
     child.argv = [
         sys.executable,
         "-c",
-        "import signal,sys,time; signal.signal(signal.SIGTERM, lambda *a: (time.sleep(3), sys.exit(0))); time.sleep(60)",
+        "import signal,sys,time,pathlib; "
+        "signal.signal(signal.SIGTERM, lambda *a: (time.sleep(3), sys.exit(0))); "
+        f"pathlib.Path({str(ready_marker)!r}).write_text('ready'); "
+        "time.sleep(60)",
     ]
     sup._start_child(child, time.monotonic())
+    # Popen returns before the child installs its SIGTERM handler. Terminating before that point
+    # kills it on the default disposition, so the window this test measures never opens.
+    deadline_ready = time.monotonic() + 30.0
+    while not ready_marker.exists() and time.monotonic() < deadline_ready:
+        time.sleep(0.02)
+    assert ready_marker.exists(), "the app child never installed its SIGTERM handler"
 
     stopper = threading.Thread(target=sup._shutdown)
     stopper.start()
