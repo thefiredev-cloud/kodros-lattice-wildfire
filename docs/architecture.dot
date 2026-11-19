@@ -1,0 +1,24 @@
+digraph "kodros-lattice-wildfire architecture" {
+  rankdir=TB; bgcolor="white"; pad=0.3; nodesep=0.45; ranksep=0.7;
+  node [shape=box, style="rounded,filled", fillcolor="#f6f6f8", color="#c9c9d1", fontname="Helvetica,Arial,sans-serif", fontsize=12, fontcolor="#1b1b1f", margin="0.18,0.1", penwidth=1.4];
+  edge [color="#5c5c66", fontname="Helvetica,Arial,sans-serif", fontsize=10, fontcolor="#5c5c66", arrowsize=0.8];
+  feeds [label="Public feeds, no keys\nNASA FIRMS, NIFC, NWS, LA County"];
+  ff [label="1 Fireline Feeds\npublish entities"];
+  lat [label="Lattice entities and tasks", color="#c2410c", penwidth=2.2, fillcolor="#fff7ed"];
+  fus [label="2 Ember Fusion\n7-day heat history"];
+  plan [label="3 Recon Planner\nassign a station check"];
+  ana [label="4 Kodros Analyst\nbrief from gathered facts"];
+  llm [label="Local cluster model\nOpenAI API"];
+  talk [label="5 Lattice Talk\nMCP tools and chat CLI"];
+  map [label="lw-map\nLeaflet on 127.0.0.1"];
+  feeds -> ff [];
+  ff -> lat [];
+  lat -> fus [];
+  fus -> lat [label="possible new start"];
+  lat -> plan [];
+  plan -> ana [label="task"];
+  ana -> llm [];
+  ana -> lat [label="brief"];
+  lat -> talk [];
+  lat -> map [];
+}

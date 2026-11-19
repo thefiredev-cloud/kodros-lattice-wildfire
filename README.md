@@ -23,6 +23,8 @@ flowchart LR
   L --> Map[lw-map: Leaflet view on 127.0.0.1]
 ```
 
+Static diagram: [docs/architecture.svg](docs/architecture.svg). Step-by-step build: [BUILD.md](BUILD.md).
+
 Every number, name and direction in a brief is checked against the facts the analyst gathered. A line that fails the check is replaced with the raw facts. Steady industrial heat (refineries) is held back using 7 days of history from all three satellites. A local contract harness stands in for a Lattice server and validates every request body against Anduril's published REST OpenAPI spec.
 
 ## Stack
