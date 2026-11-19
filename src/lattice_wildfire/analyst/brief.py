@@ -225,6 +225,12 @@ def _facility_mention(run: str, names: list[str]) -> bool | None:
     return any(phrase in name for name in names)
 
 
+def _inside_span(span: tuple[int, int], spans: list[tuple[int, int]]) -> bool:
+    """True when ``span`` lies wholly inside one of ``spans`` (a compass word inside a facility name)."""
+    start, end = span
+    return any(s <= start and end <= e for s, e in spans)
+
+
 def _fhsz_class(body: str) -> str | None:
     for match in _FHSZ_TOKEN.finditer(body):
         token = re.sub(r"\s+", " ", match.group(1))
@@ -257,19 +263,27 @@ def unsupported_reasons(body: str, facts: dict[str, Any]) -> list[str]:
         if date not in known_dates:
             reasons.append(f"date {date}")
 
+    names = facility_names(facts)
+    known_spans: list[tuple[int, int]] = []
+    for match in _CAPITALISED_RUN.finditer(body):
+        verdict = _facility_mention(match.group(0), names)
+        if verdict is False:
+            reasons.append(f"facility {match.group(0).strip()}")
+        elif verdict is True:
+            known_spans.append(match.span())
+
     abbr, words = facts_directions(facts)
     for match in _ABBR.finditer(body):
+        if _inside_span(match.span(), known_spans):
+            continue  # "S" or "N" inside a listed facility name is part of the name
         if match.group(1) not in abbr:
             reasons.append(f"direction {match.group(1)}")
     for match in _DIRECTION_WORD.finditer(body):
+        if _inside_span(match.span(), known_spans):
+            continue  # "South Bay Medical Center" names a facility, it does not claim a bearing
         token = match.group(1).lower()
         if token not in words and token.replace("-", "") not in words:
             reasons.append(f"direction {match.group(1)}")
-
-    names = facility_names(facts)
-    for match in _CAPITALISED_RUN.finditer(body):
-        if _facility_mention(match.group(0), names) is False:
-            reasons.append(f"facility {match.group(0).strip()}")
     for match in _STATION_NUMBER.finditer(body):
         if not _known_station(match.group(1), names):
             reasons.append(f"station {match.group(0).strip()}")

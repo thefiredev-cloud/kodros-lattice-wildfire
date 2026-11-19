@@ -473,6 +473,34 @@ def test_verifier_replaces_an_invented_station(captured_facts: dict) -> None:
     assert "Verifier: 1 lines replaced (NEAREST RESOURCES -> facts-only lines)" in md
 
 
+def test_verifier_keeps_a_compass_word_inside_a_listed_facility_name(captured_facts: dict) -> None:
+    """A hospital called "South Bay" is a name, not a bearing claim (eval note 2026-11-09).
+
+    The 2026-11-09 eval replaced the Avalon EXPOSURES line for "direction South" because the
+    hospital is "Kaiser Permanente - South Bay Medical Center": a correct line was thrown away.
+    """
+    facts = json.loads(json.dumps(captured_facts))
+    base = facts["exposures"]["hospitals"][0]
+    facts["exposures"]["hospitals"] = [
+        {
+            **base,
+            "name": "Kaiser Permanente - South Bay Medical Center",
+            "direction": "N",
+            "distance_km": 44.0,
+        },
+        {**base, "name": "West Hills Hospital and Medical Center", "direction": "SW", "distance_km": 7.7},
+    ]
+    body = (
+        "Kaiser Permanente - South Bay Medical Center 44.0 km N, "
+        "West Hills Hospital and Medical Center 7.7 km SW."
+    )
+    assert unsupported_reasons(body, facts) == []
+    # A bearing the facts do not report is still caught, even next to a compass-word name.
+    assert unsupported_reasons("Kaiser Permanente - South Bay Medical Center 44.0 km E.", facts) == [
+        "direction E"
+    ]
+
+
 def _one_bad_line(lines: list[str]) -> Any:
     text = "\n".join(lines)
 
