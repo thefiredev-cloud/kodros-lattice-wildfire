@@ -4,6 +4,12 @@ Five wildfire apps built on Anduril's Lattice SDK. They turn free public fire da
 
 Written by a firefighter-paramedic as part of [Kodros](https://kodros.ai), using only public data and a self-hosted model.
 
+## On your hardware
+
+- Does: runs five small Python apps on one machine. That machine needs no GPU.
+- Needs: Python 3.12 and an OpenAI-compatible model endpoint that you host, set with `KODROS_LLM_URL`. The VRAM you need depends on the model you serve. The checked-in eval ran against DeepSeek-V4.1-Flash-1017 (China-origin) on the author's two-node cluster.
+- Stays on-prem: briefs come from your own endpoint, with no hosted models. The feeds app fetches public data from NASA, NIFC, NWS and LA County over the internet, and the build fetches Anduril's spec. Tests run offline on captured data.
+
 ## How it works
 
 ```mermaid
