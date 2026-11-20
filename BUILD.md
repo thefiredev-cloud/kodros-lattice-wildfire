@@ -22,6 +22,7 @@ curl -fsSL -o vendor/lattice-rest-openapi.json https://developer.anduril.com/ope
 
 ```bash
 uv run ruff check src tests evals
+uv run ruff format --check src tests evals
 uv run pytest -q
 ```
 
@@ -50,12 +51,15 @@ Set `LATTICE_ENDPOINT`, `ENVIRONMENT_TOKEN` and `SANDBOXES_TOKEN` in `.env` and 
 
 ## Run with Docker
 
-`Dockerfile` copies `vendor/`, so fetch the spec first (see Build).
+`Dockerfile` copies `vendor/`, so fetch the spec first (see Build). `compose.yaml` also reads `.env` for every service, so create it from the example: without one, every compose command stops with `env file .../.env not found`.
 
 ```bash
-docker compose up --build            # harness plus the five apps
+cp .env.example .env
+docker compose up --build            # harness plus feeds, fusion, analyst and planner
 docker compose --profile test run --rm test
 ```
+
+The compose file runs the harness and four apps. `lw-talk` and `lw-map` are not services; run them on the host against the harness port.
 
 ## Settings
 
